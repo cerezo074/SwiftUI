@@ -1,0 +1,53 @@
+
+.DS_Store
+*/.DS_Store
+*.DS_Store
+*Breakpoints_v2.xcbkptlist
+*/Breakpoints_v2.xcbkptlist
+Grability/.DS_Store
+# User specific files
+Grability/Olimpica.xcodeproj/xcshareddata/xcschemes/*
+Grability/Olimpica.xcworkspace/xcuserdata/*
+Grability/Pods/Pods.xcodeproj/xcuserdata/*
+Grability/SQLite/SQLite.xcodeproj/xcuserdata/*
+*/UserInterfaceState.xcuserstate
+
+
+#Scripts output
+scripts/hooks/pre-commit/output.txt
+
+#Pods
+Pods/
+**/Pods
+*/Pods/
+*/Podfile.lock
+Podfile.lock
+
+
+## Other
+*.xccheckout
+*.moved-aside
+*.xcuserstate
+*.xcscmblueprint
+*.orig
+
+## Obj-C/Swift specific
+*.hmap
+*.ipa
+
+## Aditional 
+*/xcschememanagement.plist
+xcuserdata/
+DerivedData
+
+Grability/.idea/.name
+Grability/.idea/Grability.iml
+Grability/.idea/misc.xml
+Grability/.idea/modules.xml
+Grability/.idea/workspace.xml
+Grability/.idea/xcode.xml
+Grability/.idea/inspectionProfiles/profiles_settings.xml
+Grability/.idea/inspectionProfiles/Project_Default.xml
+Grability/.idea/runConfigurations/Grability.xml
+Grability/nrdSYM.zip
+DerivedData
