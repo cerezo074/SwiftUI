@@ -7,8 +7,10 @@
 //
 
 import SwiftUI
+import Combine
 
 struct ContentView: View {
+    
     let rTarget = Double.random(in: 0..<1)
     let gTarget = Double.random(in: 0..<1)
     let bTarget = Double.random(in: 0..<1)
@@ -16,6 +18,7 @@ struct ContentView: View {
     @State var gGuess: Double
     @State var bGuess: Double
     @State var showAlert: Bool = false
+    @ObservedObject var timer = TimerCounter()
     
     var body: some View {
         NavigationView{
@@ -31,17 +34,21 @@ struct ContentView: View {
                     VStack {
                         ZStack(alignment: .center) {
                             Color(red: rGuess, green: gGuess, blue: bGuess)
-                            Text("60")
+                            Text(String(timer.counter))
                                 .padding(.all, 5)
                                 .background(Color.white)
                                 .mask(Circle())
+                                .foregroundColor(.black)
                         }
                         Text("R: \(Int(rGuess * 255.0))"
                             + " G: \(Int(gGuess * 255.0))"
                             + " B: \(Int(bGuess * 255.0))")
                     }
                 }
-                Button(action: { self.showAlert = true }) {
+                Button(action: {
+                    self.showAlert = true
+                    self.timer.killTimer()
+                }) {
                     Text("Hit me")
                 }.alert(isPresented: $showAlert) {
                     Alert(title: Text("Your score"), message: Text(String(computeScore())))
@@ -87,6 +94,5 @@ struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView(rGuess: 0.5, gGuess: 0.5, bGuess: 0.5)
             .previewLayout(.fixed(width: 568, height: 380))
-            .environment(\.colorScheme, .dark)
     }
 }
