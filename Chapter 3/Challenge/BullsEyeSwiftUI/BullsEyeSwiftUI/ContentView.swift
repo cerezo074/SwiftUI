@@ -68,7 +68,7 @@ struct ProgressSlider: View {
     var hintColor: Double {
         let valueNumber = Int(value * 100)
         let opacity: Double = Double(valueNumber) / Double(target)
-        return opacity <= 1 ? opacity : 1
+        return opacity <= 1 ? 1 - opacity : 0
     }
 }
 
