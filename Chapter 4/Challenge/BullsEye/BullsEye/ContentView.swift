@@ -1,0 +1,91 @@
+/// Copyright (c) 2019 Razeware LLC
+///
+/// Permission is hereby granted, free of charge, to any person obtaining a copy
+/// of this software and associated documentation files (the "Software"), to deal
+/// in the Software without restriction, including without limitation the rights
+/// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+/// copies of the Software, and to permit persons to whom the Software is
+/// furnished to do so, subject to the following conditions:
+///
+/// The above copyright notice and this permission notice shall be included in
+/// all copies or substantial portions of the Software.
+///
+/// Notwithstanding the foregoing, you may not use, copy, modify, merge, publish,
+/// distribute, sublicense, create a derivative work, and/or sell copies of the
+/// Software in any work that is designed, intended, or marketed for pedagogical or
+/// instructional purposes related to programming, coding, application development,
+/// or information technology.  Permission for such use, copying, modification,
+/// merger, publication, distribution, sublicensing, creation of derivative works,
+/// or sale is expressly withheld.
+///
+/// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+/// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+/// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+/// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+/// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+/// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+/// THE SOFTWARE.
+
+import SwiftUI
+
+struct ContentView: View {
+    @ObservedObject
+    private var viewModel = GameViewModel()
+    
+    var body: some View {
+        VStack {
+            Text("Put the Bull's Eye as close as you can to: \(viewModel.targetValue)")
+            ColorSlider(value: $viewModel.currentValue, hint: viewModel.hint)
+            ColorUISlider(value: $viewModel.currentValue, hint: viewModel.hint)
+            ShowOutcomeButton(showAlert: $viewModel.showAlert, score: viewModel.score)
+        }
+    }
+}
+
+struct ShowOutcomeButton: View {
+    @Binding var showAlert: Bool
+    let score: Int
+    
+    var body: some View {
+        Button(action: { self.showAlert = true }) {
+            Text("Hit Me!")
+        }.alert(isPresented: $showAlert) {
+            Alert(title: Text("Your Score"), message: Text(String(score)))
+        }.padding()
+    }
+}
+
+struct ColorSlider: View {
+    @Binding var value: Float
+    let hint: Float
+    
+    var body: some View {
+        HStack {
+            Text("0")
+            Slider(value: $value, in: 1.0...100.0, step: 1.0)
+                .background(Color.blue)
+                .opacity(Double(hint))
+            Text("100")
+        }.padding(.horizontal)
+    }
+}
+
+struct ColorUISlider: View {
+    @Binding var value: Float
+    let hint: Float
+    
+    var body: some View {
+        HStack {
+            Text("0")
+            HintSlider(value: $value, hint: hint)
+            Text("100")
+        }.padding(.horizontal)
+    }
+}
+
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        ContentView()
+            .previewLayout(.fixed(width: 568, height: 320))
+    }
+}
