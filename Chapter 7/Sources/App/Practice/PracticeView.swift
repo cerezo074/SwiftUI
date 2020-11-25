@@ -57,7 +57,8 @@ extension PracticeView: View {
                 CongratulationsView()
             } else {
                 ChallengeView(
-                    onComplete: onComplete, practiceStore: practiceStore
+                    onComplete: onComplete,
+                    practice: PracticeStore()
                 ).onAppear(perform: {
                     self.practiceStore.build()
                 })

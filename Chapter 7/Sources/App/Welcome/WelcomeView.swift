@@ -29,47 +29,47 @@
 import SwiftUI
 
 struct WelcomeView {
-  
-  @State private var showHome = false
     
-  private let name: String
+    @State private var showHome = false
+    @EnvironmentObject var user: User
     
-  init(name: String) {
-    self.name = name
-  }
+    private let name: String
+    
+    init(name: String) {
+        self.name = name
+    }
 }
 
 extension WelcomeView: View {
-  
-  var body: some View {
-    Group {
-      if showHome {
-        HomeView()
-      } else {
-        VStack {
-          Text("Hi, \(name)")
-            .font(.largeTitle)
-          Text("Welcome to Kuchi")
-            .font(.title)
-          Button(action: {
-            self.showHome = true
-          }, label: {
-            HStack {
-              Image(systemName: "play")
-              Text("Start")
+    
+    var body: some View {
+        Group {
+            if showHome {
+                HomeView()
+            } else {
+                VStack {
+                    Text("Hi, \(name)")
+                        .font(.largeTitle)
+                    Text("Welcome to Kuchi")
+                        .font(.title)
+                    Button(action: {
+                        self.showHome = true
+                    }, label: {
+                        HStack {
+                            Image(systemName: "play")
+                            Text("Start")
+                        }
+                    })
+                }
             }
-          })
         }
-      }
     }
-  }
 }
 
 #if DEBUG
 struct WelcomeView_Previews: PreviewProvider {
-
-  static var previews: some View {
-    WelcomeView(name: "Ray").environmentObject(User())
-  }
+    static var previews: some View {
+        WelcomeView(name: "Ray").environmentObject(User())
+    }
 }
 #endif

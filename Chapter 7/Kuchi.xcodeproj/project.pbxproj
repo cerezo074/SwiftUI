@@ -32,9 +32,9 @@
 		9B352BD122F9AB5F00644004 /* ScoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B352BCD22F9AB5F00644004 /* ScoreView.swift */; };
 		9B352BD222F9AB5F00644004 /* PracticeStore+Identifiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B352BCE22F9AB5F00644004 /* PracticeStore+Identifiable.swift */; };
 		9B352BD322F9AB5F00644004 /* DeckBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B352BCF22F9AB5F00644004 /* DeckBuilder.swift */; };
-		E634C99324CE1969002A291E /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = E634C99224CE1969002A291E /* Profile.swift */; };
-		E634C99524CE19C8002A291E /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = E634C99424CE19C8002A291E /* User.swift */; };
-		E634C99724CE1D59002A291E /* User+ObservableObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = E634C99624CE1D59002A291E /* User+ObservableObject.swift */; };
+		FEC370A4256DFA4B007D39AD /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEC370A3256DFA4B007D39AD /* Profile.swift */; };
+		FEC370A7256DFB92007D39AD /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEC370A6256DFB92007D39AD /* User.swift */; };
+		FEC370AA256DFD22007D39AD /* User+ObservableObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEC370A9256DFD22007D39AD /* User+ObservableObject.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -66,9 +66,9 @@
 		9B352BCD22F9AB5F00644004 /* ScoreView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScoreView.swift; sourceTree = "<group>"; };
 		9B352BCE22F9AB5F00644004 /* PracticeStore+Identifiable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PracticeStore+Identifiable.swift"; sourceTree = "<group>"; };
 		9B352BCF22F9AB5F00644004 /* DeckBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeckBuilder.swift; sourceTree = "<group>"; };
-		E634C99224CE1969002A291E /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
-		E634C99424CE19C8002A291E /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
-		E634C99624CE1D59002A291E /* User+ObservableObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "User+ObservableObject.swift"; sourceTree = "<group>"; };
+		FEC370A3256DFA4B007D39AD /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
+		FEC370A6256DFB92007D39AD /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		FEC370A9256DFD22007D39AD /* User+ObservableObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "User+ObservableObject.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,9 +107,9 @@
 			isa = PBXGroup;
 			children = (
 				6793694E23007B1D00AC4630 /* ProfileView.swift */,
-				E634C99224CE1969002A291E /* Profile.swift */,
-				E634C99424CE19C8002A291E /* User.swift */,
-				E634C99624CE1D59002A291E /* User+ObservableObject.swift */,
+				FEC370A3256DFA4B007D39AD /* Profile.swift */,
+				FEC370A6256DFB92007D39AD /* User.swift */,
+				FEC370A9256DFD22007D39AD /* User+ObservableObject.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -295,8 +295,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				6758885722DA0C090015DE4B /* AppDelegate.swift in Sources */,
-				E634C99324CE1969002A291E /* Profile.swift in Sources */,
-				E634C99724CE1D59002A291E /* User+ObservableObject.swift in Sources */,
+				FEC370A4256DFA4B007D39AD /* Profile.swift in Sources */,
+				FEC370AA256DFD22007D39AD /* User+ObservableObject.swift in Sources */,
 				6758885922DA0C090015DE4B /* SceneDelegate.swift in Sources */,
 				9B352BD122F9AB5F00644004 /* ScoreView.swift in Sources */,
 				5797556F22E124EE00246F70 /* WelcomeView.swift in Sources */,
@@ -315,7 +315,7 @@
 				57D84F4622E4DC370059EC25 /* ChallengeView.swift in Sources */,
 				6758889122DF0E780015DE4B /* ChoicesView.swift in Sources */,
 				57D84F4022E4CB030059EC25 /* ProgressView.swift in Sources */,
-				E634C99524CE19C8002A291E /* User.swift in Sources */,
+				FEC370A7256DFB92007D39AD /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

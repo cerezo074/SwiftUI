@@ -63,9 +63,10 @@ struct ChallengeView {
     // MARK: - Initializers
     
     /// Initialize a new `ChallengeView`.
-    init(onComplete: @escaping () -> Void, practiceStore: PracticeStore) {
+    init(onComplete: @escaping () -> Void,
+         practice: PracticeStore) {
+        self.practiceStore = practice
         self.onComplete = onComplete
-        self.practiceStore = practiceStore
     }
     
     // MARK: - Private Methods
@@ -74,6 +75,10 @@ struct ChallengeView {
         self.isCorrect = self.practiceStore.answer(with: answer)
         self.score = self.practiceStore.score
         self.isAnswered = true
+        
+        if self.practiceStore.finished {
+            onComplete()
+        }
     }
     
     private func challengeOutcomeAlert() -> Alert {
@@ -132,8 +137,8 @@ extension ChallengeView: View {
                 onSelected: answered,
                 answers: wordAssessment?.answers ?? [String]()
             )
-                .frame(height: 300)
-                .padding()
+            .frame(height: 300)
+            .padding()
         }
         .alert(isPresented: $isAnswered, content: {
             self.challengeOutcomeAlert()
@@ -146,7 +151,8 @@ extension ChallengeView: View {
 #if DEBUG
 struct ChallengeView_Previews: PreviewProvider {
     static var previews: some View {
-        return ChallengeView(onComplete: {}, practiceStore: PracticeStore())
+        return ChallengeView(onComplete: {},
+                             practice: PracticeStore())
     }
 }
 

@@ -31,8 +31,8 @@ import SwiftUI
 struct RegisterView {
     
     @State var name: String = ""
-    @State var isRegistered: Bool = false
     @EnvironmentObject var user: User
+    @State var isRegistered: Bool = false
     
     private let title = "Welcome to Kuchi"
     
@@ -73,7 +73,9 @@ extension RegisterView: View {
 #if DEBUG
 struct RegisterView_Previews: PreviewProvider {
     static var previews: some View {
-        RegisterView()
+        Group {
+            RegisterView().environmentObject(User())
+        }
     }
 }
 #endif

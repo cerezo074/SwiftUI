@@ -51,7 +51,6 @@ extension SceneDelegate: UIWindowSceneDelegate {
             )
             self.window = window
             window.makeKeyAndVisible()
-            
         }
     }
     

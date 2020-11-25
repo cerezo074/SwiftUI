@@ -2,7 +2,7 @@
 //  User+ObservableObject.swift
 //  Kuchi
 //
-//  Created by Eli Pacheco Hoyos on 26/07/20.
+//  Created by Eli Pacheco on 24/11/20.
 //  Copyright © 2020 Omnijar. All rights reserved.
 //
 
