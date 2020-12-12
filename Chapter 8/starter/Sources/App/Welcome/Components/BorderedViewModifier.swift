@@ -28,53 +28,22 @@
 
 import SwiftUI
 
-import Assessing
-import Languages
-import Learning
-
-/// Displays the practice view with question and potential answers (choices).
-struct PracticeView {
-    
-    private let practiceStore: PracticeStore
-    
-    /// Determines when the practice session has been completed.
-    /// Compares the session score with the number of assessments generated.
-    @State private var practiceComplete: Bool = false
-    
-    /// Initializes a new `PracticeView` and generates a `PracticeStore`
-    /// instance for the practice session state management.
-    init() {
-        practiceStore = PracticeStore()
-    }
-    
+struct BorderedViewModifier: ViewModifier {
+  func body(content: Content) -> some View {
+    content
+      .padding(EdgeInsets(top: 8, leading: 16, bottom: 8, trailing: 16))
+      .background(Color.white)
+      .overlay(
+        RoundedRectangle(cornerRadius: 8)
+          .stroke(lineWidth: 2)
+          .foregroundColor(.blue)
+      )
+      .shadow(color: Color.gray.opacity(0.4), radius: 3, x: 1, y: 2)
+  }
 }
 
-extension PracticeView: View {
-    
-    var body: some View {
-        Group {
-            if practiceComplete {
-                CongratulationsView()
-            } else {
-                ChallengeView(
-                    onComplete: onComplete,
-                    practice: practiceStore
-                ).onAppear(perform: {
-                    self.practiceStore.build()
-                })
-            }
-        }
-    }
-    
-    func onComplete() {
-        self.practiceComplete = true
-    }
+extension View {
+  func bordered() -> some View {
+    ModifiedContent(content: self, modifier: BorderedViewModifier())
+  }
 }
-
-#if DEBUG
-struct PracticeView_Previews: PreviewProvider {    
-    static var previews: some View {
-        return PracticeView()
-    }
-}
-#endif

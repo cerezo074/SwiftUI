@@ -28,53 +28,39 @@
 
 import SwiftUI
 
-import Assessing
-import Languages
-import Learning
-
-/// Displays the practice view with question and potential answers (choices).
-struct PracticeView {
-    
-    private let practiceStore: PracticeStore
-    
-    /// Determines when the practice session has been completed.
-    /// Compares the session score with the number of assessments generated.
-    @State private var practiceComplete: Bool = false
-    
-    /// Initializes a new `PracticeView` and generates a `PracticeStore`
-    /// instance for the practice session state management.
-    init() {
-        practiceStore = PracticeStore()
-    }
-    
-}
-
-extension PracticeView: View {
+struct ChallengeView: View {
+    let challengeTest: ChallengeTest
+    @State var showAnswers = false
     
     var body: some View {
-        Group {
-            if practiceComplete {
-                CongratulationsView()
-            } else {
-                ChallengeView(
-                    onComplete: onComplete,
-                    practice: practiceStore
-                ).onAppear(perform: {
-                    self.practiceStore.build()
-                })
+        VStack {
+            Button(action: {
+                self.showAnswers = !self.showAnswers
+            }, label: {
+                QuestionView(question: challengeTest.challenge.question).frame(height: 300)
+            })
+            
+            if showAnswers {
+                Divider()
+                ChoicesView(challengeTest: challengeTest)
+                    .frame(height: 300)
+                    .padding()
             }
         }
     }
-    
-    func onComplete() {
-        self.practiceComplete = true
-    }
 }
 
-#if DEBUG
-struct PracticeView_Previews: PreviewProvider {    
-    static var previews: some View {
-        return PracticeView()
-    }
+struct ChallengeView_Previews: PreviewProvider {
+    static let challengeTest = ChallengeTest(
+      challenge: Challenge(
+        question: "おねがい　します",
+        pronunciation: "Onegai shimasu",
+        answer: "Please"
+      ),
+      answers: ["Thank you", "Hello", "Goodbye"]
+    )
+    
+  static var previews: some View {
+    ChallengeView(challengeTest: challengeTest)
+  }
 }
-#endif

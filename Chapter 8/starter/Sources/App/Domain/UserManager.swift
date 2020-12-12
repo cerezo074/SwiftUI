@@ -26,55 +26,57 @@
 /// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 /// THE SOFTWARE.
 
+import Combine
 import SwiftUI
+import Foundation
 
-import Assessing
-import Languages
-import Learning
-
-/// Displays the practice view with question and potential answers (choices).
-struct PracticeView {
-    
-    private let practiceStore: PracticeStore
-    
-    /// Determines when the practice session has been completed.
-    /// Compares the session score with the number of assessments generated.
-    @State private var practiceComplete: Bool = false
-    
-    /// Initializes a new `PracticeView` and generates a `PracticeStore`
-    /// instance for the practice session state management.
-    init() {
-        practiceStore = PracticeStore()
+final class UserManager: ObservableObject {
+  @Published
+  var profile: Profile = Profile()
+  
+  @Published
+  var settings: Settings = Settings()
+  
+  var isRegistered: Bool {
+    return profile.name.isEmpty == false
+  }
+  
+  init() {
+  }
+  
+  init(name: String) {
+    self.profile.name = name
+  }
+  
+  func persistProfile() {
+    if settings.rememberUser {
+      UserDefaults.standard.set(try? PropertyListEncoder().encode(profile), forKey: "user-profile")
+    }
+  }
+  
+  func persistSettings() {
+    UserDefaults.standard.set(try? PropertyListEncoder().encode(settings), forKey: "user-settings")
+  }
+  
+  func load() {
+    if let data = UserDefaults.standard.value(forKey: "user-profile") as? Data {
+      if let profile = try? PropertyListDecoder().decode(Profile.self, from: data) {
+        self.profile = profile
+      }
     }
     
+    if let data = UserDefaults.standard.value(forKey: "user-settings") as? Data {
+      if let settings = try? PropertyListDecoder().decode(Settings.self, from: data) {
+        self.settings = settings
+      }
+    }
+  }
+  
+  func clear() {
+    UserDefaults.standard.removeObject(forKey: "user-profile")
+  }
+  
+  func isUserNameValid(_ name: String) -> Bool {
+    return name.count >= 3
+  }
 }
-
-extension PracticeView: View {
-    
-    var body: some View {
-        Group {
-            if practiceComplete {
-                CongratulationsView()
-            } else {
-                ChallengeView(
-                    onComplete: onComplete,
-                    practice: practiceStore
-                ).onAppear(perform: {
-                    self.practiceStore.build()
-                })
-            }
-        }
-    }
-    
-    func onComplete() {
-        self.practiceComplete = true
-    }
-}
-
-#if DEBUG
-struct PracticeView_Previews: PreviewProvider {    
-    static var previews: some View {
-        return PracticeView()
-    }
-}
-#endif

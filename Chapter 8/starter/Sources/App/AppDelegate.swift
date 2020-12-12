@@ -26,55 +26,32 @@
 /// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 /// THE SOFTWARE.
 
-import SwiftUI
+import UIKit
 
-import Assessing
-import Languages
-import Learning
-
-/// Displays the practice view with question and potential answers (choices).
-struct PracticeView {
-    
-    private let practiceStore: PracticeStore
-    
-    /// Determines when the practice session has been completed.
-    /// Compares the session score with the number of assessments generated.
-    @State private var practiceComplete: Bool = false
-    
-    /// Initializes a new `PracticeView` and generates a `PracticeStore`
-    /// instance for the practice session state management.
-    init() {
-        practiceStore = PracticeStore()
-    }
-    
+@UIApplicationMain
+class AppDelegate: UIResponder, UIApplicationDelegate {
+  
+  func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+    // Override point for customization after application launch.
+    return true
+  }
+  
+  func applicationWillTerminate(_ application: UIApplication) {
+    // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+  }
+  
+  // MARK: UISceneSession Lifecycle
+  
+  func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {
+    // Called when a new scene session is being created.
+    // Use this method to select a configuration to create the new scene with.
+    return UISceneConfiguration(name: "Default Configuration", sessionRole: connectingSceneSession.role)
+  }
+  
+  func application(_ application: UIApplication, didDiscardSceneSessions sceneSessions: Set<UISceneSession>) {
+    // Called when the user discards a scene session.
+    // If any sessions were discarded while the application was not running, this will be called shortly after application:didFinishLaunchingWithOptions.
+    // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
+  }
 }
 
-extension PracticeView: View {
-    
-    var body: some View {
-        Group {
-            if practiceComplete {
-                CongratulationsView()
-            } else {
-                ChallengeView(
-                    onComplete: onComplete,
-                    practice: practiceStore
-                ).onAppear(perform: {
-                    self.practiceStore.build()
-                })
-            }
-        }
-    }
-    
-    func onComplete() {
-        self.practiceComplete = true
-    }
-}
-
-#if DEBUG
-struct PracticeView_Previews: PreviewProvider {    
-    static var previews: some View {
-        return PracticeView()
-    }
-}
-#endif

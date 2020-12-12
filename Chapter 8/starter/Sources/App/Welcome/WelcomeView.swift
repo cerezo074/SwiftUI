@@ -28,53 +28,38 @@
 
 import SwiftUI
 
-import Assessing
-import Languages
-import Learning
+struct WelcomeView: View {
+  @EnvironmentObject var userManager: UserManager
+  @EnvironmentObject var challengesViewModel: ChallengesViewModel
+  @State var showHome = false
+  
+  @ViewBuilder
+  var body: some View {
+    if showHome {
+      PracticeView(challengeTest: $challengesViewModel.currentChallenge, userName: $userManager.profile.name)
+    } else {
+    VStack {
+      Text(verbatim: "Hi, \(userManager.profile.name)")
 
-/// Displays the practice view with question and potential answers (choices).
-struct PracticeView {
-    
-    private let practiceStore: PracticeStore
-    
-    /// Determines when the practice session has been completed.
-    /// Compares the session score with the number of assessments generated.
-    @State private var practiceComplete: Bool = false
-    
-    /// Initializes a new `PracticeView` and generates a `PracticeStore`
-    /// instance for the practice session state management.
-    init() {
-        practiceStore = PracticeStore()
-    }
-    
-}
-
-extension PracticeView: View {
-    
-    var body: some View {
-        Group {
-            if practiceComplete {
-                CongratulationsView()
-            } else {
-                ChallengeView(
-                    onComplete: onComplete,
-                    practice: practiceStore
-                ).onAppear(perform: {
-                    self.practiceStore.build()
-                })
-            }
+      WelcomeMessageView()
+      
+      Button(action: {
+        self.showHome = true
+      }, label: {
+        HStack {
+          Image(systemName: "play")
+          Text(verbatim: "Start")
         }
+      })
     }
-    
-    func onComplete() {
-        self.practiceComplete = true
+      .background(WelcomeBackgroundImage())
     }
+  }
 }
 
-#if DEBUG
-struct PracticeView_Previews: PreviewProvider {    
-    static var previews: some View {
-        return PracticeView()
-    }
+struct WelcomeView_Previews: PreviewProvider {
+  static var previews: some View {
+    WelcomeView()
+      .environmentObject(UserManager())
+  }
 }
-#endif
